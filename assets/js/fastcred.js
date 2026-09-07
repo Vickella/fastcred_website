@@ -32,6 +32,13 @@
     credit.textContent='Designed by VerityCore Consultancy';
     footerLinks.appendChild(credit);
   });
+  document.querySelectorAll('.loan-visual').forEach(scoreCard=>{
+    if(scoreCard.querySelector('.hero-score-images')) return;
+    const gallery=document.createElement('div');
+    gallery.className='hero-score-images';
+    gallery.innerHTML='<img alt="Cash being exchanged across a service counter" height="297" loading="lazy" src="assets/img/hero-cash-exchange.webp" width="738"><img alt="Coins growing into a small investment" height="129" loading="lazy" src="assets/img/hero-growth.webp" width="246">';
+    scoreCard.insertBefore(gallery,scoreCard.querySelector('.visual-note'));
+  });
   document.querySelectorAll('form[data-ajax-form]').forEach(form=>{
     form.addEventListener('submit', async e=>{
       e.preventDefault();

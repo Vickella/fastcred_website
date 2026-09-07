@@ -28,6 +28,7 @@
 .hero .loan-step .step-icon{color:#087a35;background:#dff4e5}
 .hero .visual-note{color:#536a5c;border-top:1px solid #d8e9dc}
 .footer-credit{display:inline-flex!important;align-items:center;margin-left:18px;padding-left:18px;border-left:1px solid rgba(255,255,255,.22);color:#bff2ca!important;font-weight:750;letter-spacing:.01em;transition:color .2s ease,transform .2s ease}.footer-credit:hover{color:#fff!important;transform:translateY(-1px)}.footer-credit:focus-visible{outline-color:#9eeaae}
+.hero-score-images{display:grid;grid-template-columns:2fr 1fr;gap:8px;margin-top:16px}.hero-score-images img{display:block;width:100%;height:76px;object-fit:cover;border-radius:10px;border:1px solid #d8e9dc}
 .hero{background-color:#174a35;background-image:url("../img/fastcred-hero.webp")}
 .hero::before,.hero::after{content:none}
 .hero .eyebrow{background:rgba(5,35,22,.62);border-color:rgba(255,255,255,.35);box-shadow:0 4px 18px rgba(0,0,0,.22)}
