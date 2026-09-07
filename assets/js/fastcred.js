@@ -32,25 +32,32 @@
     credit.textContent='Designed by VerityCore Consultancy';
     footerLinks.appendChild(credit);
   });
-  document.querySelectorAll('.loan-visual').forEach(scoreCard=>{
-    if(scoreCard.querySelector('.hero-score-images')) return;
-    const gallery=document.createElement('div');
-    gallery.className='hero-score-images';
-    gallery.innerHTML='<img alt="Cash being exchanged across a service counter" height="297" loading="lazy" src="assets/img/hero-cash-exchange.webp" width="738"><img alt="Coins growing into a small investment" height="129" loading="lazy" src="assets/img/hero-growth.webp" width="246">';
-    scoreCard.insertBefore(gallery,scoreCard.querySelector('.visual-note'));
+  document.querySelectorAll('.hero').forEach(hero=>{
+    if(hero.querySelector('.hero-slideshow')) return;
+    const slideshow=document.createElement('div');
+    slideshow.className='hero-slideshow';
+    ['assets/img/hero-cash-exchange.webp','assets/img/hero-growth.webp'].forEach((source,index)=>{
+      const slide=document.createElement('div');
+      slide.className='hero-slide';
+      slide.setAttribute('role','img');
+      slide.setAttribute('aria-label',index===0 ? 'Cash being exchanged across a service counter' : 'Coins growing into a small investment');
+      slide.style.backgroundImage=`url("${source}")`;
+      slideshow.appendChild(slide);
+    });
+    hero.prepend(slideshow);
   });
   document.querySelectorAll('form[data-ajax-form]').forEach(form=>{
     form.addEventListener('submit', async e=>{
       e.preventDefault();
       const status=form.querySelector('.form-status'); const btn=form.querySelector('button[type="submit"]');
       if(!form.checkValidity()){ form.reportValidity(); return; }
-      const original=btn.textContent; btn.disabled=true; btn.textContent='Sending…';
+      const original=btn.textContent; btn.disabled=true; btn.textContent='Sendingâ€¦';
       try{
         const res=await fetch(form.action,{method:'POST',body:new FormData(form)}); const text=await res.text();
         status.style.display='block';
         if(res.ok && text.trim().startsWith('OK')){status.textContent='Thank you. Your request has been received. FastCred will contact you using the details provided.';status.style.background='#e8f7ec';status.style.color='#075c2d';form.reset();}
         else throw new Error(text);
-      }catch(err){status.style.display='block';status.style.background='#fff3cd';status.style.color='#664d03';status.textContent='We could not send the form automatically. Please call +263 86 77007437 or email info@fastcred.co.zw.';}
+      }catch(err){status.style.display='block';status.style.background='#fff3cd';status.style.color='#664d03';status.textContent='We could not send the form automatically. Please call +263 86 440 85732 or +263 77 477 9980 or email info@fastcred.co.zw.';}
       finally{btn.disabled=false;btn.textContent=original;}
     });
   });
