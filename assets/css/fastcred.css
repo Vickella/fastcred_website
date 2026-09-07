@@ -14,15 +14,29 @@
 @media(max-width:1024px){.brand{min-width:auto}.brand-status{display:none}.nav-list a{padding:8px 9px}.hero-grid{gap:36px}.cards-4{grid-template-columns:repeat(2,1fr)}.process{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:860px){:root{--header-h:70px}.header-inner{gap:12px}.brand img{width:46px;height:46px}.brand-name{font-size:16px}.header-cta{margin-left:auto}.menu-toggle{display:inline-flex}.nav{position:fixed;inset:70px 0 auto 0;background:#fff;border-bottom:1px solid var(--fc-line);box-shadow:0 18px 40px rgba(3,63,37,.12);padding:12px 16px 18px;transform:translateY(-140%);opacity:0;visibility:hidden;transition:.22s ease;z-index:999}.nav.open{transform:translateY(0);opacity:1;visibility:visible}.nav-list{flex-direction:column;align-items:stretch}.nav-list a{justify-content:flex-start;width:100%;min-height:46px}.hero{padding:70px 0 56px}.hero-grid,.split,.form-wrap{grid-template-columns:1fr}.loan-visual{max-width:620px}.cards-3{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr 1fr}.desktop-only{display:none!important}}
 @media(max-width:640px){.container{width:min(100% - 24px,1140px)}.header-cta{padding:9px 12px;min-height:44px;font-size:13px}.brand-copy{display:none}.hero h1{font-size:42px}.hero p{font-size:17px}.hero-actions .btn{width:100%}.trust-row{gap:12px}.section{padding:58px 0}.cards-2,.cards-3,.cards-4,.process,.check-grid,.form-grid,.footer-grid{grid-template-columns:1fr}.loan-visual{padding:22px}.cta-band{padding:28px;align-items:flex-start;flex-direction:column}.cta-band .btn{width:100%}.form-card{padding:22px}.page-hero{padding:54px 0 42px}.footer-bottom{align-items:flex-start;flex-direction:column}.socials{margin-top:4px}}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 
 
 /* FastCred final UI/UX refinements */
+.hero{background-color:#174a35;background-image:url("../img/fastcred-hero.webp")}
+.hero::before,.hero::after{content:none}
+.hero .eyebrow{background:rgba(5,35,22,.62);border-color:rgba(255,255,255,.35);box-shadow:0 4px 18px rgba(0,0,0,.22)}
+.hero h1{color:#fff;text-shadow:0 3px 18px rgba(0,0,0,.72)}
+.hero p,.hero .trust-row{color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.75)}
 .hero::before{width:620px;height:620px;right:-260px;top:-260px;background:rgba(92,230,132,.12);z-index:-1}
 .hero::after{width:500px;height:500px;left:-300px;bottom:-360px;background:rgba(255,255,255,.07);z-index:-1}
 .hero-grid{min-height:520px}
 .hero-grid>div:first-child{max-width:760px}
 .hero .loan-visual{backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+.hero-grid>div:first-child{animation:hero-copy-in .7s ease-out both}
+.hero .loan-visual{animation:loan-card-in .75s .12s cubic-bezier(.2,.8,.2,1) both}
+.hero .loan-step{animation:loan-step-in .45s ease-out both}
+.hero .loan-step:nth-child(1){animation-delay:.4s}.hero .loan-step:nth-child(2){animation-delay:.52s}.hero .loan-step:nth-child(3){animation-delay:.64s}.hero .loan-step:nth-child(4){animation-delay:.76s}
+.hero .loan-step .step-icon{animation:step-icon-pulse 2.8s ease-in-out infinite}.hero .loan-step:nth-child(2) .step-icon{animation-delay:.2s}.hero .loan-step:nth-child(3) .step-icon{animation-delay:.4s}.hero .loan-step:nth-child(4) .step-icon{animation-delay:.6s}
+@keyframes hero-copy-in{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes loan-card-in{from{opacity:0;transform:translateX(32px) scale(.97)}to{opacity:1;transform:translateX(0) scale(1)}}
+@keyframes loan-step-in{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:translateX(0)}}
+@keyframes step-icon-pulse{0%,100%{transform:scale(1);box-shadow:none}50%{transform:scale(1.08);box-shadow:0 0 0 7px rgba(8,122,53,.09)}}
 
 /* Every decorative icon sits on the same horizontal row as its label/heading. */
 .card{display:grid;grid-template-columns:50px minmax(0,1fr);column-gap:16px;row-gap:14px;align-content:start;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
