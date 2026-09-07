@@ -38,7 +38,7 @@
     if(hero.querySelector('.hero-slideshow')) return;
     const slideshow=document.createElement('div');
     slideshow.className='hero-slideshow';
-    ['assets/img/hero-cash-exchange.webp?v=2','assets/img/hero-growth.webp?v=2'].forEach((source,index)=>{
+    ['assets/img/hero.png?v=original'].forEach((source,index)=>{
       const slide=document.createElement('div');
       slide.className='hero-slide';
       slide.setAttribute('role','img');
