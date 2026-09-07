@@ -22,6 +22,16 @@
     window.addEventListener('resize',()=>{if(window.innerWidth>860 && nav.classList.contains('open')) close();});
   }
   document.querySelectorAll('[data-year]').forEach(el=>el.textContent=new Date().getFullYear());
+  document.querySelectorAll('.footer-bottom > div:last-child').forEach(footerLinks=>{
+    if(footerLinks.querySelector('.footer-credit')) return;
+    const credit=document.createElement('a');
+    credit.className='footer-credit';
+    credit.href='https://veritycore.co.zw';
+    credit.target='_blank';
+    credit.rel='noopener noreferrer';
+    credit.textContent='Designed by VerityCore Consultancy';
+    footerLinks.appendChild(credit);
+  });
   document.querySelectorAll('form[data-ajax-form]').forEach(form=>{
     form.addEventListener('submit', async e=>{
       e.preventDefault();
