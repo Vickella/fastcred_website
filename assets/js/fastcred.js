@@ -22,6 +22,8 @@
     window.addEventListener('resize',()=>{if(window.innerWidth>860 && nav.classList.contains('open')) close();});
   }
   document.querySelectorAll('[data-year]').forEach(el=>el.textContent=new Date().getFullYear());
+  const textNodes=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+  while(textNodes.nextNode()) textNodes.currentNode.nodeValue=textNodes.currentNode.nodeValue.replace(/[^\x00-\x7F]/g,'');
   document.querySelectorAll('.footer-bottom > div:last-child').forEach(footerLinks=>{
     if(footerLinks.querySelector('.footer-credit')) return;
     const credit=document.createElement('a');
@@ -36,7 +38,7 @@
     if(hero.querySelector('.hero-slideshow')) return;
     const slideshow=document.createElement('div');
     slideshow.className='hero-slideshow';
-    ['assets/img/hero-cash-exchange.webp','assets/img/hero-growth.webp'].forEach((source,index)=>{
+    ['assets/img/hero-cash-exchange.webp?v=2','assets/img/hero-growth.webp?v=2'].forEach((source,index)=>{
       const slide=document.createElement('div');
       slide.className='hero-slide';
       slide.setAttribute('role','img');
@@ -51,7 +53,7 @@
       e.preventDefault();
       const status=form.querySelector('.form-status'); const btn=form.querySelector('button[type="submit"]');
       if(!form.checkValidity()){ form.reportValidity(); return; }
-      const original=btn.textContent; btn.disabled=true; btn.textContent='Sendingâ€¦';
+      const original=btn.textContent; btn.disabled=true; btn.textContent='Sending...';
       try{
         const res=await fetch(form.action,{method:'POST',body:new FormData(form)}); const text=await res.text();
         status.style.display='block';
