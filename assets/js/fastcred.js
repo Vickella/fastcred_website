@@ -38,7 +38,7 @@
     if(hero.querySelector('.hero-slideshow')) return;
     const slideshow=document.createElement('div');
     slideshow.className='hero-slideshow';
-    ['assets/img/hero.png?v=original'].forEach((source,index)=>{
+    ['assets/img/hero.png?v=original','assets/img/cash.webp?v=1','assets/img/herow.webp?v=1','assets/img/herox.webp?v=1','assets/img/heroy.webp?v=1','assets/img/heroz.webp?v=1'].forEach((source,index)=>{
       const slide=document.createElement('div');
       slide.className='hero-slide';
       slide.setAttribute('role','img');

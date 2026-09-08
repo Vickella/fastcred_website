@@ -94,6 +94,8 @@
 .hero-slideshow{position:absolute;inset:0;z-index:-2;overflow:hidden;background:#174a35}
 .hero-slide{position:absolute;inset:0;background-position:center;background-size:cover;opacity:0;animation:hero-slide-cycle 12s ease-in-out infinite;transform:scale(1.03)}
 .hero-slide:nth-child(2){animation-delay:6s}
-@keyframes hero-slide-cycle{0%,45%{opacity:1;transform:scale(1)}50%,95%{opacity:0;transform:scale(1.06)}100%{opacity:1;transform:scale(1)}}
+@keyframes hero-slide-cycle{0%,13%{opacity:1;transform:scale(1)}16.7%,96%{opacity:0;transform:scale(1.06)}100%{opacity:1;transform:scale(1)}}
+.hero-slide{animation-duration:36s}
+.hero-slide:nth-child(2){animation-delay:6s}.hero-slide:nth-child(3){animation-delay:12s}.hero-slide:nth-child(4){animation-delay:18s}.hero-slide:nth-child(5){animation-delay:24s}.hero-slide:nth-child(6){animation-delay:30s}
 .hero-grid{z-index:1}
 @media(prefers-reduced-motion:reduce){.hero-slide{animation:none;opacity:0}.hero-slide:first-child{opacity:1}}
