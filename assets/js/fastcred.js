@@ -48,6 +48,51 @@
     });
     hero.prepend(slideshow);
   });
+  document.querySelectorAll('[data-loan-calculator]').forEach(form=>{
+    const amount=form.elements.amount;
+    const rate=form.elements.rate;
+    const term=form.elements.term;
+    const method=form.elements.method;
+    const error=form.querySelector('.calculator-error');
+    const section=form.closest('.calculator-shell');
+    const methodHelp=form.querySelector('[data-method-help]');
+    const outputs={payment:section.querySelector('[data-result-payment]'),principal:section.querySelector('[data-result-principal]'),interest:section.querySelector('[data-result-interest]'),total:section.querySelector('[data-result-total]')};
+    const format=value=>`USD ${new Intl.NumberFormat('en-ZW',{minimumFractionDigits:2,maximumFractionDigits:2}).format(value)}`;
+    const clearResults=()=>Object.values(outputs).forEach(output=>output.textContent='--');
+    const calculate=()=>{
+      const principal=Number(amount.value);
+      const annualRate=Number(rate.value);
+      const months=Number(term.value);
+      if(!Number.isFinite(principal)||principal<=0||rate.value.trim()===''||!Number.isFinite(annualRate)||annualRate<0||annualRate>1000||!Number.isInteger(months)||months<1||months>120){
+        error.textContent='Please enter a valid loan amount, annual interest rate and a term between 1 and 120 months.';
+        error.classList.add('visible');
+        clearResults();
+        return;
+      }
+      error.textContent='';
+      error.classList.remove('visible');
+      let payment;
+      let total;
+      if(method.value==='flat'){
+        const interest=principal*(annualRate/100)*(months/12);
+        total=principal+interest;
+        payment=total/months;
+      }else{
+        const monthlyRate=(annualRate/100)/12;
+        payment=monthlyRate===0 ? principal/months : principal*(monthlyRate*Math.pow(1+monthlyRate,months))/(Math.pow(1+monthlyRate,months)-1);
+        total=payment*months;
+      }
+      outputs.payment.textContent=format(payment);
+      outputs.principal.textContent=format(principal);
+      outputs.interest.textContent=format(Math.max(0,total-principal));
+      outputs.total.textContent=format(total);
+    };
+    form.addEventListener('submit',event=>{event.preventDefault();calculate();});
+    method.addEventListener('change',()=>{
+      methodHelp.textContent=method.value==='flat' ? 'Interest is calculated on the original loan amount for the full term.' : 'Interest is calculated on the outstanding balance.';
+      if(rate.value) calculate();
+    });
+  });
   document.querySelectorAll('form[data-ajax-form]').forEach(form=>{
     form.addEventListener('submit', async e=>{
       e.preventDefault();
