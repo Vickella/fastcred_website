@@ -93,6 +93,17 @@
       if(rate.value) calculate();
     });
   });
+  const params=new URLSearchParams(window.location.search);
+  const loanType=document.querySelector('select[name="loan_type"]');
+  if(loanType && params.get('type')){
+    const requested={sme:'SME Business Loan',personal:'Personal Loan',order:'Order Financing',invoice:'Invoice Discounting',asset:'Asset-Based Finance',agriculture:'Agribusiness Loan',emergency:'Emergency Loan',school:'School-Fee Loan'}[params.get('type')];
+    if(requested && [...loanType.options].some(option=>option.value===requested)) loanType.value=requested;
+  }
+  const contactSubject=document.querySelector('#c_subject');
+  if(contactSubject && params.get('service')){
+    const requested={advisory:'Business advisory enquiry',pos:'POS systems enquiry',accounting:'Bookkeeping and accounting enquiry',planning:'Financial planning enquiry'}[params.get('service')];
+    if(requested) contactSubject.value=requested;
+  }
   document.querySelectorAll('form[data-ajax-form]').forEach(form=>{
     form.addEventListener('submit', async e=>{
       e.preventDefault();
@@ -102,7 +113,7 @@
       try{
         const res=await fetch(form.action,{method:'POST',body:new FormData(form)}); const text=await res.text();
         status.style.display='block';
-        if(res.ok && text.trim().startsWith('OK')){status.textContent='Thank you. Your request has been received. FastCred will contact you using the details provided.';status.style.background='#e8f7ec';status.style.color='#075c2d';form.reset();}
+        if(res.ok && text.trim().startsWith('OK')){status.textContent=form.dataset.success||'Thank you. Your request has been received. FastCred will contact you using the details provided.';status.style.background='#e8f7ec';status.style.color='#075c2d';form.reset();}
         else throw new Error(text);
       }catch(err){status.style.display='block';status.style.background='#fff3cd';status.style.color='#664d03';status.textContent='We could not send the form automatically. Please call +263 86 440 85732 or +263 77 477 9980 or email info@fastcred.co.zw.';}
       finally{btn.disabled=false;btn.textContent=original;}
